@@ -1,8 +1,15 @@
+import tailwindcss from "@tailwindcss/vite";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/icon', '@nuxt/ui'],
+  modules: ['@nuxt/icon', '@nuxt/ui', 'shadcn-nuxt'],
+  css: ['~/assets/css/main.css'],
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
   runtimeConfig: {
     public: {
       supabaseUrl: process.env.SUPABASE_URL,

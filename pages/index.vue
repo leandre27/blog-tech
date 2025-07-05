@@ -1,9 +1,11 @@
 <template>
+    <LoginForm/>        
     <div>
-        z
     </div>
 </template>
 
 <script setup lang="ts">
+import LoginForm from '~/components/LoginForm.vue';
+
 
 </script>
