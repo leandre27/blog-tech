@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-screen flex justify-center items-center">
-    <section class="max-md:max-w-full max-w-1/2 px-54 py-8  w-full h-full  flex flex-col justify-center space-y-10 items-center">
+    <section class=" lg:max-w-1/2 px-54 py-8  w-full h-full  flex flex-col justify-center space-y-10 items-center">
       <div class="flex justify-start w-full">
           <h1 class="text-2xl">logo</h1>
       </div>
@@ -39,9 +39,9 @@
               </div>
   
               <div class="flex justify-end">
-                <nuxt-link class="text-teal-800 font-bold">
+                <NuxtLink class="text-teal-800 font-bold">
                   Forgot password ?
-                </nuxt-link>
+                </NuxtLink>
               </div>
             </div> 
             <button type="submit" class=" bg-teal-800 hover:bg-teal-950 rounded-md text-white h-10 w-full">Sign in</button>
@@ -63,14 +63,14 @@
       </div>
 
     </section>
-    <section class="max-w-1/2 w-full h-full bg-teal-950 max-md:hidden">
+    <section class="max-w-1/2 w-full h-full bg-teal-950 max-lg:hidden">
 
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { LucideLock, LucideMail, LucideEyeOff } from '#components';
+import { LucideLock, LucideMail, LucideEyeOff, NuxtLink } from '#components';
 
 
 </script>
