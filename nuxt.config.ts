@@ -3,8 +3,13 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/icon', '@nuxt/ui', 'nuxt-lucide-icons'],
+  modules: ['@nuxt/icon', '@nuxt/ui', 'nuxt-lucide-icons','@nuxtjs/color-mode'],
   css: ['~/assets/css/main.css'],
+  colorMode: {
+    preference: 'system',
+    fallback: 'light',
+    classSuffix: ''
+  },
   vite: {
     plugins: [
       tailwindcss(),

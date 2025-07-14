@@ -1,8 +1,11 @@
 <template>
-  <div>
+  <div class="transition-colors duration-300 bg-white text-black dark:bg-slate-950 dark:text-white">
     <NuxtRouteAnnouncer />
-    <NuxtLayouts>
+    <NuxtLayout>
       <NuxtPage/>
-    </NuxtLayouts>
+    </NuxtLayout>
   </div>
 </template>
+
+<script>
+</script>
