@@ -27,9 +27,6 @@ export interface MangaData {
 }
 
 
-
-
-
 export interface MangaListResponse {
   result: 'ok'
   response: 'collection'

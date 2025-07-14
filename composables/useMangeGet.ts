@@ -1,13 +1,16 @@
-import type { LatestChaptersResponse, MangaListResponse, MangaStatsResponse } from "~/types/manga.type"
+import type { LatestChaptersResponse, MangaSingleResponse, MangaStatsResponse } from "~/types/manga.type"
 
 export const useMangaGet = async (id: string) => {
 
-
-    const mangaData = await $fetch<MangaListResponse>('https://api.mangadex.org/manga/'+ id,{
+    
+    
+    const manga = await $fetch<MangaSingleResponse>('https://api.mangadex.org/manga/'+ id,{
         params: {
-            "includes[]": ['cover_art','author','artist','tag']
+            "includes[]": ['cover_art','author','artist']
         }
     });
+
+    
 
 
     const chaptersData = await $fetch<LatestChaptersResponse>(`https://api.mangadex.org/manga/${id}/feed`, {
@@ -30,47 +33,41 @@ export const useMangaGet = async (id: string) => {
     }) ;
 
 
-
-    return await Promise.all(
-
-        mangaData.data.map(async (ma) => {
-
-
-            const tags = ma.attributes?.tags?.map((tag:any) => {
-                return {
-                    id: tag.id,
-                    name: tag.attributes?.name?.fr ?? tag.attributes?.name?.en,
-                    group: tag.group
-                }
-            })
+    const tags = manga.data.attributes?.tags?.map((tag:any) => {
+         return {
+             id: tag.id,
+             name: tag.attributes?.name?.fr ?? tag.attributes?.name?.en,
+             group: tag?.attributes?.group
+         }
+    })
 
 
-            const coverFileName = ma.relationships.find((co) => co.type === "cover_art")?.attributes.fileName;
-            const cover = `https://uploads.mangadex.org/covers/${ma.id}/${coverFileName}`;
+    const coverFileName = manga.data.relationships.find((co) => co.type === "cover_art")?.attributes.fileName;
+    const cover = `https://uploads.mangadex.org/covers/${manga.data.id}/${coverFileName}`;
 
-            const statisticData = await $fetch<MangaStatsResponse>(`https://api.mangadex.org/statistics/manga/${ma.id}`);
+    const statisticData = await $fetch<MangaStatsResponse>(`https://api.mangadex.org/statistics/manga/${manga.data.id}`);
 
-            const rating = statisticData.statistics?.[ma.id].rating.average
-            const follows = statisticData.statistics?.[ma.id].follows;
+    const rating = statisticData.statistics?.[manga.data.id].rating.average
+    const follows = statisticData.statistics?.[manga.data.id].follows;
 
 
-            return {
+    const result = {
 
-                id: ma.id,
-                title: ma.attributes?.title?.fr ?? ma.attributes?.title?.en,
-                description: ma.attributes?.description?.fr ?? ma.attributes?.description?.en,
-                status: ma.attributes.status,
-                year: ma.attributes?.year ?? null,
-                cover,
-                tags,
-                rating,
-                follows,
-                chapter
+        id: manga.data.id,
+        title: manga.data.attributes?.title?.fr ?? manga.data.attributes?.title?.en,
+        description: manga.data.attributes?.description?.fr ?? manga.data.attributes?.description?.en,
+        status: manga.data.attributes.status,
+        year: manga.data.attributes?.year ?? null,
+        cover,
+        tags,
+        rating,
+        follows,
+        chapter
 
-            }
-        })
-    )
+    }
 
+    return result;
+   
 
 }
 

@@ -16,6 +16,12 @@
 <script setup lang="ts">
 const {id} = useRoute().params
 
+const manga = await useMangaGet(id.toString());
+
+
+console.log(manga);
+
+
 
 </script>
 
