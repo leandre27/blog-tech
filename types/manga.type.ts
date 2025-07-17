@@ -73,7 +73,8 @@ export interface MangaStatsResponse {
 export interface ChapterData {
   id: string
   attributes: {
-    chapter: string | null
+    chapter: string | null,
+    volume: string | null,
     title: string | null
     publishAt: string,
     translatedLanguage?: string | [];
@@ -99,4 +100,12 @@ export interface MangaTopFollowedChapters {
   mangaId: string;
   rating?: number;
   follows?: number;
+  author?: {
+    name: string,
+    link?: string
+  };
+  artist?: {
+    name: string,
+    link?: string | null
+  };
 }
